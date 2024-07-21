@@ -12,13 +12,13 @@ const router = () => {
   const request = parseRequestUrl();
   const parseUrl = 
     (request.resource ? `/${request.resource}` : '/') +
-    (request.id ? '/:id': '') +
-    (request.action ? `/${request.resource}` : '')
+    (request.id ? '/:id' : '') +
+    (request.action ? `${request.action}` : '')
 
   const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
-  
+
   const main = document.getElementById("main");
-  main.innerHTML = screen.render();
+  main.innerHTML = screen.render()
 }
 
 window.addEventListener("load", router);
