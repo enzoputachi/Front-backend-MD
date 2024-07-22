@@ -1,3 +1,4 @@
+//update the screen based on the url
 import Error404Screen from "./src/screens/Error404Screen";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProductScreen from "./src/screens/ProductScreen";
@@ -8,7 +9,7 @@ const routes = {
   "/product/:id": ProductScreen,
 }
 
-const router = () => {
+const router = async () => {
   const request = parseRequestUrl();
   const parseUrl = 
     (request.resource ? `/${request.resource}` : '/') +
@@ -18,7 +19,7 @@ const router = () => {
   const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
 
   const main = document.getElementById("main");
-  main.innerHTML = screen.render()
+  main.innerHTML =await  screen.render()
 }
 
 window.addEventListener("load", router);

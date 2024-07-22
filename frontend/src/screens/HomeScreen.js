@@ -1,8 +1,20 @@
 import data from "../../../backend/data";
 
 const HomeScreen = {
-  render: () => {
-    const { products } = data;
+  render: async () => {
+    // const { products } = data;
+    const response = await fetch("http://localhost:5000/api/products", {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if(!response || !response.ok) {
+      return `<div>Error in getting data</div>`
+    }
+
+    const products = await response.json();
+
     return `
       <section id="hero">
         <img src="img/MD-banner/banner.jpg" alt="">
