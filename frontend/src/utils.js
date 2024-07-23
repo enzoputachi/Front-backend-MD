@@ -8,3 +8,11 @@ export const parseRequestUrl = () => {
         action: request[3]
     }
 }
+
+
+//rerender
+export const rerender = async (component) => {
+    document.getElementById('main').innerHTML = await component.render();
+    await component.after_render();
+  };
+  

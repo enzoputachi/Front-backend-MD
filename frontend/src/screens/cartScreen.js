@@ -1,6 +1,6 @@
 import { getProduct } from "../api.js";
 import { getCartItems, setCartItems } from "../localStorage.js";
-import { parseRequestUrl } from "../utils.js";
+import { parseRequestUrl, rerender } from "../utils.js";
 
 //add tocart function
 const addToCart = (item, forceUpdate = false) => {
@@ -20,8 +20,33 @@ const addToCart = (item, forceUpdate = false) => {
   setCartItems(cartItems);
 };
 
+const removeFromCart = (id) => {
+    setCartItems(getCartItems().filter((x) => x.product !== id));
+    if (id === parseRequestUrl().id) {
+        document.location.hash = '/cart';
+    } else {
+        rerender(CartScreen);
+    }
+};
+
 const CartScreen = {
-  after_render: () => {},
+  after_render: () => {
+    document.querySelectorAll('.qty-select').forEach(qtySelect => {
+        qtySelect.addEventListener('change', (e) => {
+            const item = getCartItems().find((x) => x.product === qtySelect.id);
+            addToCart({...item, qty: Number(e.target.value)}, true)
+            rerender(CartScreen);
+        })
+    });
+
+    //add event listener to the remove buttons
+    document.querySelectorAll('.remove-btn').forEach(removeButton => {
+        removeButton.addEventListener('click', () => {
+            removeFromCart(removeButton.id)
+        })
+    })
+  },
+
 
   render: async () => {
     //use parseRequestUrl to access the request parameters
@@ -40,7 +65,44 @@ const CartScreen = {
       });
     }
 
-    return `<div>Cart Scre</div><div>${getCartItems().length}</div>`;
+    
+    const cartItems = getCartItems();
+
+    return `
+    <section id="page-header"></section>
+    <section id="cart" class="section-p1">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Remove</td>
+                    <td>Images</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Subtotal</td>
+                </tr>
+            </thead>
+            <tbody>
+                ${
+                    cartItems.length === 0
+                    ? `<tr><td>Cart is empty.</td></tr>`
+                    : cartItems.map(item => `
+                    <tr>
+                        <td><button class="remove-btn" id="${item.product}"><i class="fa-regular fa-circle-xmark"></i></td>
+                        <td><img src="${item.image}" alt="${item.name}"></td>
+                        <td>${item.name}</td>
+                        <td>$${item.price}</td>
+                        <td>
+                            <input type="number" class="qty-select" id="${item.product}" value="${item.qty}" min="1" max="${item.countInStock}">
+                        </td>
+                        <td>$${item.price * item.qty}</td>
+                    </tr>
+                    `).join('\n')
+                }
+            </tbody>
+        </table>
+    </section>
+    `;
   },
 };
 
