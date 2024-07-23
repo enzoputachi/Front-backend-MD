@@ -26,8 +26,8 @@ const ProductScreen = {
                 <option value="">Small</option>
                 <option value="">Large</option>
             </select>
-            <input type="number" value="1">
-            <button class="normal" id="addToCart">Add To Cart</button>
+            <input type="number" value="1" min="0">
+            <button class="normal" id="add-to-cart">Add To Cart</button>
             <h4>Product Details</h4>
             <span>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -43,7 +43,7 @@ const ProductScreen = {
 
   after_render: () => {
     const request = parseRequestUrl();
-    document.getElementById("addToCart").addEventListener("click", () => {
+    document.getElementById("add-to-cart").addEventListener("click", () => {
       document.location.hash = `/cart/${request.id}`;
     });
   },

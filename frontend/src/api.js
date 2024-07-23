@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export const getProduct = async (id) => {
     try {
+        //send an ajax request to the backend to get product
         const url = `${apiUrl}/api/products/${id}`;
-        console.log(`fetching from URL: ${url}`)
         const response = await axios({
             url: url,
             method: 'GET',
