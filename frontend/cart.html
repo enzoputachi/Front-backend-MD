@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    /* CART STYLING */
+    * {
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    .cart{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        right: 0px;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .cart-list {
+        border: 1px solid black;
+        flex: 3 1 60rem;
+    }
+
+    .cart-action {
+        flex: 1 1 20rem;
+        background-color: #f0f0f0;
+        border: 0.5rem;
+        padding: 1rem;
+    }
+
+    .cart-list-container {
+        padding: 1rem;
+        list-style-type: none;
+    }
+
+    .cart-list-container li {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 0.1rem;
+        border-radius: 0.1rem #c0c0c0 solid;
+    }
+
+    .cart-list-container img {
+        max-width: 10rem;
+        max-height: 10rem;
+    }
+  
+</style>
+<body>
+    <div class="content cart">
+        <div class="cart-list">
+            <ul class="cart-list-container">
+                <li>
+                    <h3>Shoppin Cart</h3>
+                    <div>Price</div>
+                </li>
+                <li>
+                    <div class="cart-image">
+                        <img src="./img/MD-features/f0.webp" alt="">
+                    </div>
+                    <div class="cart-name">
+                        <div>
+                            <a href="">
+                                My name the yuury jiyd
+                            </a>
+                        </div>
+                        <div>
+                            Qty:
+                            <select name="" id="" class="qty-select">
+                                <option value="1">1</option>
+                            </select>
+                            <button type="button" class="delete-button">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="cart-price">
+                        $122
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cart-action">
+            <h3>
+                subtotal
+                :
+
+                $0
+            </h3>
+            <button id="Checkout-button">Proceed to Checkout</button>
+        </div>
+    </div>
+</body>
+</html>
