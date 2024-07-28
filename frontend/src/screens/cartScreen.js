@@ -2,7 +2,7 @@ import { getProduct } from "../api.js";
 import { getCartItems, setCartItems } from "../localStorage.js";
 import { parseRequestUrl, rerender } from "../utils.js";
 
-// add to cart function
+//ADD TO CART//
 const addToCart = (item, forceUpdate = false) => {
   let cartItems = getCartItems();
   const existItem = cartItems.find(
@@ -19,10 +19,11 @@ const addToCart = (item, forceUpdate = false) => {
 
   setCartItems(cartItems);
   if (forceUpdate) {
-    rerender(CartScreen);
+    // rerender(CartScreen);
   }
 };
 
+//REMOVE FROM CART//
 const removeFromCart = (id) => {
   setCartItems(getCartItems().filter((x) => x.product !== id));
   if (id === parseRequestUrl().id) {
@@ -32,6 +33,7 @@ const removeFromCart = (id) => {
   }
 };
 
+//DEFINE CART SCREEN//
 const CartScreen = {
   after_render: () => {
     document.querySelectorAll('.qty-select').forEach(qtySelect => {
@@ -74,38 +76,43 @@ const CartScreen = {
 
     return `
       <section id="page-header"></section>
-      <section id="cart" class="section-p1">
-        <table width="100%">
-          <thead>
-            <tr>
-              <td>Remove</td>
-              <td>Images</td>
-              <td>Product</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Subtotal</td>
-            </tr>
-          </thead>
-          <tbody>
+        <div class="cart-list">
+          <ul class="cart-list-container">
+            <li>
+              <h3>Shopping Cart</h3>
+              <div>Price</div>
+            </li>
             ${
-              cartItems.length === 0
-                ? `<tr><td colspan="6">Cart is empty.</td></tr>`
-                : cartItems.map(item => `
-                  <tr>
-                    <td><button class="remove-btn" id="${item.product}"><i class="fa-regular fa-circle-xmark"></i></button></td>
-                    <td><img src="${item.image}" alt="${item.name}"></td>
-                    <td>${item.name}</td>
-                    <td>$${item.price}</td>
-                    <td>
-                      <input type="number" class="qty-select" id="${item.product}" value="${item.qty}" min="1" max="${item.countInStock}">
-                    </td>
-                    <td>$${item.price * item.qty}</td>
-                  </tr>
-                `).join('\n')
+              cartItems.length === 0?
+              '<div>Cart is empty. <a href="/#/">Go shopping</a>':
+              cartItems.map(item => `
+                <li>
+                  <div class="cart-image">
+                    <img src="${item.image}" alt="${item.name}" />
+                  </div>
+                  <div class="cart-name">
+                    <div>
+                      <a href="/#/product/${item.product}">
+                        ${item.name}
+                      </a>
+                    </div>
+                    <div>
+                      Qty: <select class="qty-select" id="${item.product}">
+                        <option value="1">1</option>
+                      </select>
+                      <button type="button" class="detete=button" id="${item.product}">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <div class="cart-price">
+                    $${item.price}
+                  </div>
+                </li>
+              `).join('')
             }
-          </tbody>
-        </table>
-      </section>
+          </ul>
+        </div>
     `;
   },
 };
