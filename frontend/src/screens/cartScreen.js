@@ -64,7 +64,7 @@ const CartScreen = {
           name: product.name,
           image: product.image,
           price: product.price,
-          countInStock: product.countInStock,
+          countInStock: product.countInstock,
           qty: 1,
         });
       } catch (error) {
