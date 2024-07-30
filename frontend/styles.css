@@ -582,7 +582,7 @@ footer .copyright {
 
 #prodetails .single-pro-details button,
 #checkout-button,
-#delete-button {
+button.delete-button {
   background-color: var(--green);
   color: var(--white);
 }

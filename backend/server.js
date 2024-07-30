@@ -1,6 +1,16 @@
 import express from 'express'
 import cors from 'cors'
 import data from './data.js'
+import mongoose from 'mongoose';
+import config from './config.js';
+
+//connect to MongoDB
+mongoose.connect(config.MONGODB_URL)
+.then(() => {
+    console.log('Connected to mongodb');
+}).catch((error) => {
+    console.error('Failed to connect to MongoDB', error)
+})
 
 const app = express();
 

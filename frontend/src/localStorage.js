@@ -1,4 +1,4 @@
-export const getCartItems = (cartItems) => {
+export const getCartItems = () => {
   try {
     const cartItems = localStorage.getItem("cartItems");
     return cartItems ? JSON.parse(cartItems) : [];
