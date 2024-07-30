@@ -10,30 +10,40 @@ const addToCart = (item, forceUpdate = false) => {
   );
 
   if (existItem) {
-    cartItems = cartItems.map((cartItem) =>
-      cartItem.product === existItem.product ? item : cartItem
-    );
+    if (forceUpdate) {
+      cartItems = cartItems.map((cartItem) =>
+        cartItem.product === existItem.product ? item : cartItem
+      );
+    }
   } else {
     cartItems = [...cartItems, item];
   }
 
   setCartItems(cartItems);
-  if (forceUpdate) {
-    // rerender(CartScreen);
+
+  if(forceUpdate) {
+    rerender(CartScreen);
   }
+
 };
 
+//*****************//
 //REMOVE FROM CART//
+//***************//
 const removeFromCart = (id) => {
+  //get item but filter out the id of deleted item
   setCartItems(getCartItems().filter((x) => x.product !== id));
   if (id === parseRequestUrl().id) {
+    //redirect user to CartScreen
     document.location.hash = '/cart';
   } else {
     rerender(CartScreen);
   }
 };
 
+//*******************//
 //DEFINE CART SCREEN//
+//*****************//
 const CartScreen = {
   after_render: () => {
     document.querySelectorAll('.qty-select').forEach(qtySelect => {
@@ -44,11 +54,15 @@ const CartScreen = {
     });
 
     // add event listener to the remove buttons
-    document.querySelectorAll('.remove-btn').forEach(removeButton => {
+    document.querySelectorAll('.delete-button').forEach(removeButton => {
       removeButton.addEventListener('click', () => {
         removeFromCart(removeButton.id);
       });
     });
+
+    document.getElementById("checkout-button").addEventListener("click", () => {
+      document.location.hash = '/signin'
+    })
   },
 
   render: async () => {
@@ -104,7 +118,7 @@ const CartScreen = {
                           :`<option value="${x + 1}">${x + 1}</option>`
                           ).join('')}
                       </select>
-                      <button type="button" id="delete-button" class="white" id="${item.product}">
+                      <button type="button" class="white delete-button" id="${item.product}">
                         Delete
                       </button>
                     </div>
@@ -119,7 +133,7 @@ const CartScreen = {
         </div>
         <div class="cart-action">
           <h3>
-            Subtotal (${cartItems.reduce((a, c) => a +c.qty, 0)} item)
+            Subtotal (${cartItems.reduce((a, c) => a +c.qty, 0)} item(s))
             : 
             $${cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
           </h3>
