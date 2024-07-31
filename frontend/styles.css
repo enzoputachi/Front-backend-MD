@@ -406,17 +406,23 @@ body {
   width: 40%;
 }
 
+.email-input, 
+.password-input,
 #newsletter input {
   height: 3rem;
   padding: 0 1.25em;
   font-size: 14px;
   width: 100%;
-  border: 1px solid transparent;
+  border: 1px solid #818ea0;
   border-radius: 4px;
   outline: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+}
 
+
+#newsletter input {
+  border: 1px solid transparent;
 }
 
 #newsletter button {
@@ -582,7 +588,8 @@ footer .copyright {
 
 #prodetails .single-pro-details button,
 #checkout-button,
-button.delete-button {
+button.delete-button,
+#signin-button {
   background-color: var(--green);
   color: var(--white);
 }
@@ -673,6 +680,36 @@ button.delete-button {
   /* font-size: 1rem; */
   padding: 0.5rem;
 }
+
+/* FORM STYLING*/
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.form-items {
+  display: flex;
+  flex-direction: column;
+  width: 32rem;
+  padding: 2rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  list-style-type: none;
+}
+
+.form-items li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-container h1 {
+  font-size: 2.5rem;
+}
+
+
 /* MEDIA QUERY */
 
 @media (max-width: 1889px) {
