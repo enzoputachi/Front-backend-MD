@@ -16,12 +16,15 @@ const routes = {
 
 const router = async () => {
   const request = parseRequestUrl();
+  console.log('parsed request:', request)
   const parseUrl = 
     (request.resource ? `/${request.resource}` : '/') +
     (request.id ? '/:id' : '') +
     (request.action ? `${request.action}` : '')
+    console.log('parsed url:', parseUrl);
 
   const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
+  console.log('selected screen:', screen);
 
   const main = document.getElementById("main");
   main.innerHTML = await screen.render();

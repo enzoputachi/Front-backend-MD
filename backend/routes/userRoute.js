@@ -21,8 +21,8 @@ userRouter.get("/createadmin", expressAsyncHandler(async (req, res) => {
   }
 }));
 
-userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
-  /*send a rewuest to the database tp retrieve a 
+userRouter.post("/signin", expressAsyncHandler(async (req, res) => {
+  /*send a request to the database to retrieve a 
   user with the specified signin details*/
   const signInUser = await User.findOne({
     email: req.body.email,

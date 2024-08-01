@@ -19,8 +19,34 @@ export const getProduct = async (id) => {
 
         return response.data;
 
-    } catch (err) {
-        console.log(err);
-        return {error: err.response.data.message || err.message};
+    } catch (error) {
+        console.log(error);
+        return {error: error.response.data.message || error.message};
     }
 };
+
+export const signin = async ({ email, password }) => {
+    try {
+        const response = await axios({
+            url: `${apiUrl}/api/users/signin`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: {
+                email,
+                password,
+            },
+        });
+
+        if(response.statusText !== 'OK') {
+            throw new Error(response.data.message);
+        }
+
+        return response.data;
+
+    } catch (error) {
+        console.log(error);
+        return { error: error.response?.data?.message || error.message }
+    }
+}
