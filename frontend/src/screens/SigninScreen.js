@@ -1,4 +1,5 @@
 import { signin } from "../api.js";
+import { getUserInfo, setUserInfo } from "../localStorage.js";
 
 const SigninScreen = {
     after_render: () => {
@@ -11,14 +12,20 @@ const SigninScreen = {
             });
 
             if(data.error) {
-                alert(data.error);
+                alert(data.error); 
             } else {
+                //save user info in the local storage
+                setUserInfo(data);
                 document.location.hash = '/';
             }
         })
     },
 
     render: () => {
+        if(getUserInfo().name) {
+            document.location.hash = '/';
+        }
+
         return `
         <div class="form-container">
             <form action="" id="signin-form">
