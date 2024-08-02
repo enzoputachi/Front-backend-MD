@@ -1,15 +1,16 @@
 import { getProduct } from "../api.js";
-import { parseRequestUrl } from "../utils.js";
+import { hideLoading, parseRequestUrl, showLoading } from "../utils.js";
 
 const ProductScreen = {
   render: async () => {
     const request = parseRequestUrl();
+    showLoading();
     const product = await getProduct(request.id);
-
     if (product.error) {
       return `<div>${product.error}</div>`;
     }
-
+    hideLoading();
+    
     return `
         <section id="prodetails" class="section-p1">
             <div class="single-pro-image">
