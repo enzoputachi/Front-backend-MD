@@ -1,4 +1,5 @@
 //update the screen based on the url
+import Header from "./components/Header.js";
 import CartScreen from "./screens/CartScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
@@ -24,8 +25,13 @@ const router = async () => {
     console.log('parsed url:', parseUrl);
 
   const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
-  console.log('selected screen:', screen);
 
+  // Header
+  const header = document.getElementById('header-container');
+  header.innerHTML = await Header.render();
+  await Header.after_render();
+
+  // Main
   const main = document.getElementById("main");
   main.innerHTML = await screen.render();
 
