@@ -5,7 +5,7 @@ import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
 import ProductScreen from "./screens/ProductScreen.js";
 import SigninScreen from "./screens/SigninScreen.js";
-import { parseRequestUrl } from "./utils.js";
+import { hideLoading, parseRequestUrl, showLoading } from "./utils.js";
 
 const routes = {
   "/": HomeScreen,
@@ -16,6 +16,7 @@ const routes = {
 }
 
 const router = async () => {
+  showLoading();
   const request = parseRequestUrl();
   console.log('parsed request:', request)
   const parseUrl = 
@@ -40,6 +41,7 @@ const router = async () => {
   } else {
     console.warn('after_render is not a function for this screen.');
   }
+  hideLoading();
 }
 
 window.addEventListener("load", router);
