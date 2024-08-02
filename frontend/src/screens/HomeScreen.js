@@ -1,7 +1,9 @@
 import axios from "axios";
+import { hideLoading, showLoading } from "../utils.js";
 
 const HomeScreen = {
   render: async () => {
+    showLoading();
     // const { products } = data;
     const response = await axios({
       url: "http://localhost:5000/api/products",
@@ -9,6 +11,7 @@ const HomeScreen = {
         "Content-Type": "application/json",
       },
     });
+    hideLoading();
 
     const products = response.data;
 
