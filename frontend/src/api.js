@@ -52,11 +52,10 @@ export const signin = async ({ email, password }) => {
     }
 }
 
-// Register 
-
+// Register function
 export const register = async ({ name, email, password }) => {
     
-    //Axios request to be sent to server
+    //Send HTTP request using Axios
     try {
         const response = await axios({
             url: `${apiUrl}/api/users/register`,
@@ -64,11 +63,7 @@ export const register = async ({ name, email, password }) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            data: {
-                name,
-                email,
-                password,
-            },
+            data: { name, email, password, },
         });
 
         if(response.statusText !== 'OK') {
