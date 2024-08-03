@@ -25,6 +25,7 @@ export const getProduct = async (id) => {
     }
 };
 
+// Sign in function
 export const signin = async ({ email, password }) => {
     try {
         const response = await axios({
@@ -34,6 +35,37 @@ export const signin = async ({ email, password }) => {
                 'Content-Type': 'application/json',
             },
             data: {
+                email,
+                password,
+            },
+        });
+
+        if(response.statusText !== 'OK') {
+            throw new Error(response.data.message);
+        }
+
+        return response.data;
+
+    } catch (error) {
+        console.log(error);
+        return { error: error.response?.data?.message || error.message }
+    }
+}
+
+// Register 
+
+export const register = async ({ name, email, password }) => {
+    
+    //Axios request to be sent to server
+    try {
+        const response = await axios({
+            url: `${apiUrl}/api/users/register`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: {
+                name,
                 email,
                 password,
             },
