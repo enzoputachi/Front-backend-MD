@@ -445,8 +445,6 @@ body {
 .email-input, 
 .password-input,
 #newsletter input {
-  height: 3rem;
-  padding: 0 1.25em;
   font-size: 14px;
   width: 100%;
   border: 1px solid #818ea0;
@@ -454,8 +452,15 @@ body {
   outline: none;
 }
 
+.email-input, 
+.password-input {
+  padding: 0.5rem;
+}
+
 
 #newsletter input {
+  padding: 0 1.25em;
+  height: 3rem;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid transparent;
@@ -625,7 +630,8 @@ footer .copyright {
 #prodetails .single-pro-details button,
 #checkout-button,
 button.delete-button,
-#signin-button {
+#signin-button,
+#register-button {
   background-color: var(--green);
   color: var(--white);
 }
@@ -720,15 +726,18 @@ button.delete-button,
 /* FORM STYLING*/
 .form-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   height: 100%;
+  margin-top: 1rem;
 }
 
 .form-items {
   display: flex;
   flex-direction: column;
-  width: 32rem;
+  width: 25rem;
+  height: 450px;
   padding: 2rem;
   border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
@@ -738,12 +747,15 @@ button.delete-button,
 .form-items li {
   display: flex;
   flex-direction: column;
+  height: 3rem;
   margin-bottom: 1rem;
-  margin-top: 1rem;
+  font-size: 10px;
+  padding: 0.5rem;
 }
 
 .form-container h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  margin-top: 0px;
 }
 
 
