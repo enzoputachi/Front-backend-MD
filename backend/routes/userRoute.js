@@ -58,13 +58,41 @@ userRouter.post("/register", expressAsyncHandler(async (req, res) => {
     res.status(401).send({
       message: 'Invalid user data',
     })
-  } else {
+  } 
+  
+  else {
     res.send({
       _id: createdUser._id,
       name: createdUser.name,
       email: createdUser.email,
       isAdmin: createdUser.isAdmin,
       token: generateToken(createdUser),
+    })
+  }
+}));
+
+userRouter.put("/:id", expressAsyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if(!user) {
+    res.status(401).send({
+      message: 'User not foundaaaa!',
+    })
+  } 
+  
+  else {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.password = req.body.password || user.password;
+
+    const updatedUser = await user.save();
+
+    res.send({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser),
     })
   }
 }));
