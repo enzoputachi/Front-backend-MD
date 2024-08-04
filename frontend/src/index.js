@@ -4,6 +4,7 @@ import CartScreen from "./screens/CartScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
 import ProductScreen from "./screens/ProductScreen.js";
+import ProfileScreen from "./screens/ProfileScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
 import SigninScreen from "./screens/SigninScreen.js";
 import { hideLoading, parseRequestUrl, showLoading } from "./utils.js";
@@ -14,7 +15,8 @@ const routes = {
   '/cart/:id': CartScreen,
   '/cart': CartScreen,
   '/signin': SigninScreen,
-  '/register': RegisterScreen
+  '/register': RegisterScreen,
+  '/profile': ProfileScreen,
 }
 
 const router = async () => {
@@ -37,12 +39,7 @@ const router = async () => {
   // Main
   const main = document.getElementById("main");
   main.innerHTML = await screen.render();
-
-  if (typeof screen.after_render === 'function') {
-    await screen.after_render();
-  } else {
-    console.warn('after_render is not a function for this screen.');
-  }
+  if(screen.after_render) await screen.after_render();
   hideLoading();
 }
 
