@@ -1,9 +1,15 @@
 import { update } from "../api.js";
-import { getUserInfo, setUserInfo } from "../localStorage.js";
+import { getUserInfo, setUserInfo, clearUser } from "../localStorage.js";
 import { hideLoading, showLoading, showMessage } from "../utils.js";
 
 const ProfileScreen = {
     after_render: () => {
+        document.getElementById("signout-button")
+        .addEventListener('click', () => {
+            clearUser();
+            document.location.hash = '/';
+        })
+
         document.getElementById("profile-form")
         .addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -42,11 +48,11 @@ const ProfileScreen = {
                 </li>
                 <li>
                     <label for="name">Name</label>
-                    <input class="email-input" type="name" name="name" id="name" value=${name}/>
+                    <input class="email-input" type="name" name="name" id="name" value=${name} />
                 </li>
                 <li>
                     <label for="email">Email</label>
-                    <input class="email-input" type="email" name="email" id="email" value=${email}/>
+                    <input class="email-input" type="email" name="email" id="email" value=${email} />
                 </li>
                 <li>
                     <label for="passord">Password</label>
@@ -56,11 +62,8 @@ const ProfileScreen = {
                     <button type="submit" class="normal" id="register-button">Update</button>
                 </li>
                 <li>
-                    <div>
-                        Already have an account?
-                        <a href="/#/signin">Sign-In</a>
-                    </div>
-                </li>
+                    <button type="button" class="normal" id="signout-button">Sign Out</button>
+                </li>            
             </ul>
             </form>
         </div>
