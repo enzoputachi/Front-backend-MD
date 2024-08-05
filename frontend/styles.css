@@ -115,7 +115,8 @@ button.white {
   margin: 1.5rem;
 }
 
-#message-overlay-close-button {
+#message-overlay-close-button,
+#signout-button {
   border: 1px solid black;
 }
 
