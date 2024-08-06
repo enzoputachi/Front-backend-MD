@@ -83,6 +83,16 @@ button.white {
   transition: 0.2s;
 }
 
+#prodetails .single-pro-details button,
+#checkout-button,
+button.delete-button,
+#signin-button,
+#register-button,
+#shipping-button {
+  background-color: var(--green);
+  color: var(--white);
+}
+
 .overlay {
   display: none;
   position: fixed;
@@ -628,15 +638,6 @@ footer .copyright {
   margin-right: 10px;
 }
 
-#prodetails .single-pro-details button,
-#checkout-button,
-button.delete-button,
-#signin-button,
-#register-button {
-  background-color: var(--green);
-  color: var(--white);
-}
-
 #prodetails .single-pro-details input:focus {
   outline: none;
 }
@@ -759,6 +760,25 @@ button.delete-button,
   margin-top: 0px;
 }
 
+/* CHECKOUTSTEPS STYLING */
+.checkout-steps {
+  display: flex;
+  justify-content: space-between;
+  width: 30rem;
+  margin: 1rem auto;
+}
+
+.checkout-steps > div {
+  border-top: 0.3rem #c0c0c0 solid;
+  color: #c0c0c0;
+  flex: 1 1;
+  padding-top: 1rem;
+}
+
+.checkout-steps > div.active {
+  color: #f08000;
+  border-top: 0.3rem #f08000 solid;
+}
 
 /* MEDIA QUERY */
 
