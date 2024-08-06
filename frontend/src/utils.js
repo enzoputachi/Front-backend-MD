@@ -1,3 +1,5 @@
+import { getCartItems } from "./localStorage.js";
+
 //Extract parameters from Url 
 export const parseRequestUrl = () => {
     const url = document.location.hash.toLowerCase();
@@ -27,7 +29,7 @@ export const hideLoading = () => {
     document.getElementById('loading-overlay').classList.remove('active');
 };
 
-//Show meaage overlay
+//Show message overlay
 export const showMessage = (message, callback) => {
     document.getElementById('message-overlay').innerHTML = `
         <div>
@@ -43,4 +45,13 @@ export const showMessage = (message, callback) => {
             callback();
         }
     })
+}
+
+//Add feat to redirect user based on the shopping cart item 
+export const redirectUser = () => {
+    if(getCartItems().length !== 0) {
+        document.location.hash = '/shipping'
+    } else {
+        document.location.hash = '/'
+    }
 }
