@@ -70,6 +70,6 @@ export const setShipping = ({
 }) => {
   localStorage.setItem(
     'shipping',
-    JSON.stringify(address, city, postalCode, country) 
+    JSON.stringify({ address, city, postalCode, country }) 
   );
 };
