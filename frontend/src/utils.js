@@ -55,3 +55,10 @@ export const redirectUser = () => {
         document.location.hash = '/'
     }
 }
+
+//Feature to get current screen
+export const getCurrentScreen = () => {
+    const request = parseRequestUrl();
+    const screen = request.resource ? `${request.resource}` : '/';
+    return screen;
+}
