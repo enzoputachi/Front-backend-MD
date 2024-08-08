@@ -73,3 +73,19 @@ export const setShipping = ({
     JSON.stringify({ address, city, postalCode, country }) 
   );
 };
+
+
+//define func to get Payment
+export const getPayment = () => {
+  const shipping = localStorage.getItem('payment')
+  ? JSON.parse(localStorage.getItem('payment'))
+  : {
+      paymentMethod: 'paypal',
+    };
+  return shipping;
+};
+
+export const setPayment = ({ paymentMethod = 'paypal' }) => {
+  localStorage.setItem( 'payment', JSON.stringify({ address, city, postalCode, country }) 
+  );
+};
