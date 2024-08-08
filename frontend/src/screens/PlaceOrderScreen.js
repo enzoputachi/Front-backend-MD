@@ -66,34 +66,44 @@ const PlaceOrderScreen = {
                         </div>
                     </div>
                     <div>
-                    <ul className="cart-list-container">
-                        <li>
-                            <h2>Shopping Cart</h2>
-                            <div>Price</div>
-                        </li>
-                        ${
-                            orderItems.map(item => `
-                                <li>
-                                    <div class="cart-image">
-                                        <img src="${item.image}" alt="${item.image}">
-                                    </div>
-                                    <div class="cart-item">
-                                        <div><a href="/#/product/${item.product}">${item.name}</a></div>
-                                    </div>
-                                    <div>
-                                        Qty: ${item.name}
-                                    </div>
-                                    <div class="cart-price">
-                                        $${item.price}
-                                    </div>
-                                </li>
-                            `)
-                        }
-                    </ul>
+                        <ul class="cart-list-container">
+                            <li>
+                                <h2>Shopping Cart</h2>
+                                <div>Price</div>
+                            </li>
+                            ${
+                                orderItems.map(item => `
+                                    <li>
+                                        <div class="cart-image">
+                                            <img src="${item.image}" alt="${item.image}">
+                                        </div>
+                                        <div class="cart-item">
+                                            <div><a href="/#/product/${item.product}">${item.name}</a></div>
+                                        </div>
+                                        <div>
+                                            Qty: ${item.qty}
+                                        </div>
+                                        <div class="cart-price">
+                                            $${item.price}
+                                        </div>
+                                    </li>
+                                `)
+                            }
+                        </ul>
                     </div>
                 </div>
-                <div className="order-action">
-                    Order Action
+
+                <div class="order-action">
+                    <ul>
+                        <li>
+                            <h2>Order Summary</h2>
+                        </li>
+                        <li><div>Items</div><div>$${itemsPrice}</div></li>
+                        <li><div>Shipping</div><div>$${shippingPrice}</div></li>
+                        <li><div>Tax</div><div>$${taxPrice}</div></li>
+                        <li class="total"><div>Order Total</div><div>$${totalPrice}</div></li>
+                        <button id="placeOrder-button" class="white">Place Order</button>
+                    </ul>
                 </div>
             </div>
         </div>

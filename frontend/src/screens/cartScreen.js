@@ -131,6 +131,7 @@ const CartScreen = {
             }
           </ul>
         </div>
+        
         <div class="cart-action">
           <h3>
             Subtotal (${cartItems.reduce((a, c) => a +c.qty, 0)} item(s))

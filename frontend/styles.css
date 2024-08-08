@@ -21,7 +21,7 @@ html {
 
 /* Global Styles */
 
-h1 {
+/* h1 {
   font-size: 50px;
   line-height: 64px;
   color: #222;
@@ -41,7 +41,7 @@ h4 {
 h6 {
   font-weight: 700;
   font-size: 12px;
-}
+} */
 
 p {
   font-size: 16px;
@@ -58,7 +58,7 @@ p {
 }
 
 button.normal {
-  font-size: 14px;
+  /* font-size: 14px; */
   font-weight: 600;
   padding: 15px 30px;
   color: #000;
@@ -83,12 +83,15 @@ button.white {
   transition: 0.2s;
 }
 
+/* BOTTON STYLING */
+
 #prodetails .single-pro-details button,
 #checkout-button,
 button.delete-button,
 #signin-button,
 #register-button,
-#shipping-button {
+#shipping-button,
+#placeOrder-button {
   background-color: var(--green);
   color: var(--white);
 }
@@ -648,13 +651,15 @@ footer .copyright {
 }
 
 /* CART PAGE */
-.cart {
+.cart,
+.order {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
 }
 
-.cart-list {
+.cart-list,
+.order-info {
   /* border: 1px solid black; */
   flex: 3 1 40rem;
   padding: 1.5rem;
@@ -780,6 +785,62 @@ footer .copyright {
   color: #f08000;
   border-top: 0.3rem #f08000 solid;
 }
+
+/* ORDER STYLING*/
+.order {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: space-between;
+}
+
+.order-info {
+  flex: 3 1 20rem;
+}
+
+.order-info > div {
+  border-radius: 0.5rem;
+  background-color: #fcfcfc;
+  border: 0.1rem #c0c0c0 solid;
+  padding: 1rem;
+  margin: 1rem;
+
+}
+
+.order .cart-list-container > li > div {
+  padding: 0;
+  margin: 10px;
+}
+
+.order-action {
+  flex: 1 1 20rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  background-color: #fcfcfc;
+  padding: 1rem;
+}
+
+.order-action ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.order-action li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+#placeOrder-button {
+  width: 100%;
+}
+
+.order-action .total {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #c04000;
+}
+
 
 /* MEDIA QUERY */
 

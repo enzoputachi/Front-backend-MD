@@ -22,7 +22,7 @@ const Header = {
         }
 
         //List of screens where the header should no be displayed
-        const hiddenHeaderOnScreen = ['signin', 'register', ]
+        const hiddenHeaderOnScreen = ['signin', 'register', 'placeorder']
 
         if (hiddenHeaderOnScreen.includes(currentScreen)) {
             return '';
