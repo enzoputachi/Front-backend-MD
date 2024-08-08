@@ -1,4 +1,4 @@
-import { getCartItems, getShipping } from '../localStorage.js'
+import { getCartItems, getPayment, getShipping } from '../localStorage.js'
 import CheckoutSteps from '../components/CheckoutSteps.js'
 
 const convertCartToOrder = () => {
