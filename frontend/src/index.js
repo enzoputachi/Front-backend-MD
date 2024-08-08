@@ -3,6 +3,7 @@ import Header from "./components/Header.js";
 import CartScreen from "./screens/CartScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import HomeScreen from "./screens/HomeScreen.js";
+import PaymentScreen from "./screens/PaymentScreen.js";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen.js";
 import ProductScreen from "./screens/ProductScreen.js";
 import ProfileScreen from "./screens/ProfileScreen.js";
@@ -20,6 +21,7 @@ const routes = {
   '/register': RegisterScreen,
   '/profile': ProfileScreen,
   '/shipping': ShippingScreen,
+  '/payment': PaymentScreen,
   '/placeorder': PlaceOrderScreen,
 }
 
