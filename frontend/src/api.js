@@ -53,7 +53,7 @@ export const signin = async ({ email, password }) => {
     }
 }
 
-// Register function
+//Define an api to Register user
 export const register = async ({ name, email, password }) => {
     
     //Send HTTP request using Axios
@@ -79,6 +79,7 @@ export const register = async ({ name, email, password }) => {
     }
 }
 
+//Define an Api for updating user detals
 export const update = async ({ name, email, password }) => {
     
     //Send HTTP request using Axios
@@ -105,4 +106,29 @@ export const update = async ({ name, email, password }) => {
         console.log(error);
         return { error: error.response?.data?.message || error.message }
     }
+}
+
+//Define an APi to create order
+export const createOrder = async(order) => {
+    const {token} = getUserInfo();
+    try {
+        const response = axios({
+            url: `${apiUrl}/api/orders/`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            data: order,
+        });
+
+        if(response.statusText !== 'OK') {
+            throw new Error(response.data.message)
+        }
+
+        return (await response).data;
+    } catch (error) {
+        return {error: (error.response.data.message ? error.response.data.message : error.message)} 
+    }
+
 }
