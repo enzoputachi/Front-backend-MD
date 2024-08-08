@@ -1,5 +1,7 @@
-import { getCartItems, getPayment, getShipping } from '../localStorage.js'
+import { getCartItems, getPayment, getShipping, cleanCart } from '../localStorage.js'
 import CheckoutSteps from '../components/CheckoutSteps.js'
+import { showLoading, hideLoading, showMessage } from '../utils.js'
+import { createOrder } from '../api.js';
 
 const convertCartToOrder = () => {
     const orderItems = getCartItems();
@@ -30,7 +32,21 @@ const convertCartToOrder = () => {
 }
 
 const PlaceOrderScreen = {
-    after_render: () => {},
+    after_render: async () => {
+        document.getElementById('placeOrder-button')
+        .addEventListener('click', async () => {
+            const order = convertCartToOrder();
+            showLoading();
+            const data = await createOrder(order);
+            hideLoading();
+            if(data.error) {
+                showMessage(data.error);
+            } else {
+                cleanCart();
+                document.location.hash = `/order/${data.order._id}`;
+            }
+        })
+    },
     render: () => {
         const {
             orderItems,
