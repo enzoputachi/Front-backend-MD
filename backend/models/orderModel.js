@@ -42,8 +42,15 @@ const orderSchema = new mongoose.Schema(
         taxPrice: Number,
         shippingPrice: Number,
         totalPrice: Number,
+        isPaid: { type: Boolean, required: true, default: false },
+        paidAt: Date,
+        isDelivered: { type: Boolean, required: true, default: false },
+        deliveredAt: Date,
     },
     {
         timestamps: true,
     }
 )
+
+const Order = mongoose.model('Order', orderSchema);
+export default Order;

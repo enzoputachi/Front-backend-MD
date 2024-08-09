@@ -109,10 +109,13 @@ export const update = async ({ name, email, password }) => {
 }
 
 //Define an APi to create order
-export const createOrder = async(order) => {
-    const {token} = getUserInfo();
+export const createOrder = async (order) => {
+    console.log("Order passed to createOrder", order);
+
     try {
-        const response = axios({
+        const {token} =  await getUserInfo();
+
+        const response = await axios ({
             url: `${apiUrl}/api/orders/`,
             method: 'POST',
             headers: {
@@ -126,9 +129,14 @@ export const createOrder = async(order) => {
             throw new Error(response.data.message)
         }
 
-        return (await response).data;
+        return response.data;
+
     } catch (error) {
-        return {error: (error.response.data.message ? error.response.data.message : error.message)} 
+        return {
+            error: 
+            error.response && error.response.data && error.response.data.message
+            ? error.response.data.message 
+            : error.message} 
     }
 
 }
