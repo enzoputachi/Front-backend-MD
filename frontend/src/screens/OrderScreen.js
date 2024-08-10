@@ -1,71 +1,24 @@
-import { getCartItems, getPayment, getShipping, cleanCart } from '../localStorage.js'
-import CheckoutSteps from '../components/CheckoutSteps.js'
-import { showLoading, hideLoading, showMessage } from '../utils.js'
-import { createOrder } from '../api.js';
+import { parseRequestUrl } from '../utils.js'
+import { getOrder } from '../api.js';
 
-const convertCartToOrder = () => {
-    const orderItems = getCartItems();
-    if(orderItems.length === 0) {
-        document.location.hash = '/cart'
-    }
-    const shipping = getShipping();
-    if(!shipping.address) {
-        document.location.hash = '/shipping'
-    }
-    const payment = getPayment();
-    if (!payment.paymentMethod) {
-        document.location.hash = '/payment'
-    }
-    const itemsPrice = orderItems.reduce((a, c) => a + c.price + c.qty, 0)
-    const shippingPrice = itemsPrice > 100 ? 0 : 10;
-    const taxPrice = Math.round(0.15 * itemsPrice * 100) / 100;
-    const totalPrice = itemsPrice + shippingPrice + taxPrice;
-    return {
-        orderItems,
-        shipping,
-        payment,
-        itemsPrice,
-        shippingPrice,
-        taxPrice,
-        totalPrice
-    }
-}
-
-const PlaceOrderScreen = {
-    after_render: async () => {
-        document.getElementById('placeOrder-button')
-        .addEventListener('click', async () => {
-            const order = convertCartToOrder();
-            showLoading();
-            const data = await createOrder(order);
-            hideLoading();
-            if(data.error) {
-                showMessage(data.error);
-            } else {
-                cleanCart();
-                document.location.hash = `/order/${data.order._id}`;
-            }
-        })
-    },
-    render: () => {
+const OrderScreen = {
+    after_render: async () => {},
+    render: async () => {
+        const request = parseRequestUrl();
         const {
-            orderItems,
+            _id,
             shipping,
             payment,
+            orderItems,
             itemsPrice,
             shippingPrice,
             taxPrice,
-            totalPrice
-        } = convertCartToOrder();
+            totalPrice,
+        } = await getOrder(request.id)
 
         return `
         <div>
-            ${CheckoutSteps.render({
-                step1: true, 
-                step2: true, 
-                step3: true, 
-                step4: true,
-            })}
+        <h1>Order ${_id}</h1>
             <div class="order">
                 <div class="order-info">
                     <div>
@@ -118,7 +71,6 @@ const PlaceOrderScreen = {
                         <li><div>Shipping</div><div>$${shippingPrice}</div></li>
                         <li><div>Tax</div><div>$${taxPrice}</div></li>
                         <li class="total"><div>Order Total</div><div>$${totalPrice}</div></li>
-                        <button id="placeOrder-button" class="white">Place Order</button>
                     </ul>
                 </div>
             </div>
@@ -127,4 +79,4 @@ const PlaceOrderScreen = {
     }
 }
 
-export default PlaceOrderScreen;
+export default OrderScreen;
